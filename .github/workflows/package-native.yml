@@ -27,7 +27,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pyinstaller
+          pip install "pyinstaller==6.8.0"
 
       - name: Build Windows EXE
         shell: pwsh
@@ -62,11 +62,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pyinstaller
+          pip install "pyinstaller==6.8.0"
 
       - name: Build macOS app bundle
         run: |
-          PYTHON_EXE=python ./scripts/build_native.sh "${{ github.event.inputs.app_name }}"
+          python -m PyInstaller --noconfirm --windowed --name "${{ github.event.inputs.app_name }}" native_app/main.py
 
       - name: Archive macOS app
         run: |
